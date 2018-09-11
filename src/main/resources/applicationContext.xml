@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
+
+    <bean id="userService" class="test.aop.service.UserService"></bean>
+    <!--增强的代码-->
+    <bean id="myAdvice" class="test.aop.advice.MyAdvice"></bean>
+    <!--配置切入点和切面-->
+    <aop:config>
+        <!--pointcut: the point to cut-->
+        <aop:pointcut id="myPointcut" expression="bean(userService)"></aop:pointcut>
+        <aop:advisor advice-ref="myAdvice" pointcut-ref="myPointcut"></aop:advisor>
+    </aop:config>
+</beans>
